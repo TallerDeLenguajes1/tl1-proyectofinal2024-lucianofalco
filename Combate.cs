@@ -11,9 +11,18 @@ public class Combate
         this.arena = arena;
     }
 
-    public void iniciar()
+    public Personaje iniciar()
     {
-        Console.WriteLine($"El combate se llevara a cabo en la arena {arena}");
+        Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
+        Console.WriteLine($"El combate se llevara a cabo en la arena {arena.Nombre}");
+        Console.WriteLine($"--------------------------------datos del combatiente {jugador_1.Nombre}-------------------------------------");
+                jugador_1.MostrarPersonaje();
+                Console.WriteLine($"--------------------------------------------------------------------");
+                Console.WriteLine($"--------------------------------datos del combatiente {jugador_2.Nombre}-------------------------------------");
+                jugador_2.MostrarPersonaje();
+                Console.WriteLine($"--------------------------------------------------------------------");
+        Console.ResetColor();
         while (jugador_1.Salud > 0 && jugador_2.Salud > 0)
         {
             Turno(jugador_1, jugador_2);
@@ -22,19 +31,34 @@ public class Combate
         }
         if (jugador_1.Salud > 0)
         {
-            Console.WriteLine($"{jugador_1.Nombre} es el ganador!");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"******************{jugador_1.Nombre} es el ganador!****************");
+            Console.ResetColor();
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"******************{jugador_2.Nombre} Pierde!****************");
+            Console.ResetColor();
+            return jugador_1;
+
         }
         else
         {
-            Console.WriteLine($"{jugador_2.Nombre} es el ganador!");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"******************{jugador_2.Nombre} es el ganador!****************");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"******************{jugador_1.Nombre} Pierde!****************");
+            Console.ResetColor();
+            return jugador_2;
         }
     }
     public void Turno(Personaje atacante, Personaje defensor)
     {
         int opcion ; 
-        Console.WriteLine($"{atacante.Nombre}'s turno.");
-        Console.WriteLine("1. Atacar");
-        Console.WriteLine("2. Usar Habilidad");
+        Console.WriteLine();
+        Console.WriteLine($"Turno de: {atacante.Nombre}'.");
+        Console.WriteLine("\t1. Atacar");
+        Console.WriteLine("\t2. Usar Habilidad");
 
         Console.WriteLine("Ingrese el numero a operar");
         while (!int.TryParse(Console.ReadLine(), out opcion))
@@ -50,7 +74,7 @@ public class Combate
                 atacante.Atacar(defensor, arena);
                 break;
             case 2:
-                atacante.usarHabilidad(atacante.HabilidadEspecial, defensor, arena);
+                atacante.UsarHabilidad(defensor, arena);
                 break;
             default:
                 Console.WriteLine("Opción no válida, perdiendo turno.");
@@ -64,6 +88,7 @@ public class Combate
         else
         {
             Console.WriteLine($"{defensor.Nombre} ha sido derrotado.");
+            Console.WriteLine();
         }
     }
 }

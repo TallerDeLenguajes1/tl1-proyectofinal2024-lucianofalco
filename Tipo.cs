@@ -1,19 +1,6 @@
 using System.Security.Cryptography;
 
-/*
-Tipos de Personajes
 
-Volador
-Habilidades: Ataque aéreo, evasión rápida, viento cortante.
-
-Tierra
-Habilidades: Terremoto, muro de piedra, ataque subterráneo.
-
-Acuático
-Habilidades: Chorro de agua, ola gigante, cura acuática.
-
-Fuego
-Habilidades: Llamarada, explosión ígnea, escudo de fuego.*/
 public enum TipoPersonaje
 {
     TERRESTRE = 1 , //Ventaja contra Acuático. Desventajas: Desventaja contra Volador.

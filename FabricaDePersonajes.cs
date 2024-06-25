@@ -2,54 +2,66 @@ public class FabricaDePersonajes
 {
     private Random random = new Random();
     List<Personaje> personajes = new List<Personaje>() ;
-    Personaje personaje = new Personaje();
-    List<HabilidadEspecial> habilidades = new List<HabilidadEspecial>();
+
+    public Random Random { get => random; set => random = value; }
+    public List<Personaje> Personajes { get => personajes; set => personajes = value; }
+
+    public FabricaDePersonajes(Random random, List<Personaje> personajes)
+    {
+        this.random = random;
+        this.personajes = personajes;
+    }
+
+    public FabricaDePersonajes()
+    {
+    }
+
     public Personaje crearPersonajeAleatorio(){
-        personaje.Ataque = random.Next(1,11);
-        personaje.Armadura = random.Next(1,11);
-        personaje.Destreza = random.Next(1,6);
-        personaje.Nivel = random.Next(1,6);
+        Personaje personaje = new Personaje();
+        personaje.Ataque = Random.Next(1,11);
+        personaje.Armadura = Random.Next(1,11);
+        personaje.Destreza = Random.Next(1,6);
+        personaje.Nivel = Random.Next(1,6);
         personaje.Salud = 100;
-        personaje.Efectividad = random.Next(1,6);
-        personaje.Velocidad = random.Next(1,11);
-        personaje.Tipo = (TipoPersonaje)random.Next(Enum.GetNames(typeof(TipoPersonaje)).Length);
+        personaje.Efectividad = Random.Next(1,6);
+        personaje.Velocidad = Random.Next(1,11);
+        personaje.Tipo = (TipoPersonaje)Random.Next(Enum.GetNames(typeof(TipoPersonaje)).Length);
         personaje.HabilidadEspecial = GenerarHabilidadAleatoria();
-        personaje.Nombre = GenerarNombreAleatorios();
+        personaje.Nombre = GenerarNombreAleatorio();
         personaje.FechaDeNacimiento = GenerarFechaDeNacimientoAleatoria();
-        personajes.Add(personaje);
+        Personajes.Add(personaje);
         return personaje;
     }
 
-    //public HabilidadEspecial(string nombre, int danio, TipoPersonaje tipo)
 
     private HabilidadEspecial GenerarHabilidadAleatoria()
     {
         string[] nombres = { "LLamarada", "Trampa de piedras", "tornado", "tsunami"};
-        string nombre = nombres[random.Next(nombres.Length)];
+        string nombre = nombres[Random.Next(nombres.Length)];
         if (nombre == "LLamarada")
         {
-            return new HabilidadEspecial(nombre , random.Next(1,11) , TipoPersonaje.FUEGO);
+            return new HabilidadEspecial(nombre , Random.Next(1,11) , TipoPersonaje.FUEGO);
         }
         else if (nombre =="Trampa de piedras")
         {
-            return new HabilidadEspecial(nombre , random.Next(1,11) , TipoPersonaje.TERRESTRE);
+            return new HabilidadEspecial(nombre , Random.Next(1,11) , TipoPersonaje.TERRESTRE);
         }
         else if (nombre == "tornado" )
         {
-            return new HabilidadEspecial(nombre , random.Next(1,11) , TipoPersonaje.VOLADOR);
+            return new HabilidadEspecial(nombre , Random.Next(1,11) , TipoPersonaje.VOLADOR);
             
         }
         else
         {
-            return new HabilidadEspecial(nombre , random.Next(1,11), TipoPersonaje.ACUATICA);
+            return new HabilidadEspecial(nombre , Random.Next(1,11), TipoPersonaje.ACUATICA);
         }
     }
 
-    private string GenerarNombreAleatorios()
+    private string GenerarNombreAleatorio()
     {
         string[] nombres = { "Aiden", "Blaze", "Kai", "Luna", "Nix", "Orion", "Phoenix", "Sage", "Titan", "Zephyr"};
 
-        string nombre = nombres[random.Next(nombres.Length)];
+        string nombre = nombres[Random.Next(nombres.Length)];
         
         return nombre;
     }
@@ -58,7 +70,7 @@ public class FabricaDePersonajes
     {
         DateTime start = new DateTime(1924, 1, 1);
         int range = (DateTime.Today - start).Days;
-        return start.AddDays(random.Next(range));
+        return start.AddDays(Random.Next(range));
     }
     
 }

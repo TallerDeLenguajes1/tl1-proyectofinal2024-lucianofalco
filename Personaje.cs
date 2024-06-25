@@ -1,16 +1,15 @@
 public class Personaje
 {
-    string nombre;
-    TipoPersonaje tipo;
-    DateTime fechaDeNacimiento;
-    int nivel;
-    double destreza;
-    double armadura;
-    double ataque;
-    int velocidad;
-    double salud;
-
-    double efectividad;
+    private string nombre;
+    private TipoPersonaje tipo;
+    private DateTime fechaDeNacimiento;
+    private int nivel;
+    private double destreza;
+    private double armadura;
+    private double ataque;
+    private int velocidad;
+    private double salud;
+    private double efectividad;
     private HabilidadEspecial habilidadEspecial;
 
     public string Nombre { get => nombre; set => nombre = value; }
@@ -46,8 +45,7 @@ public class Personaje
 
     public void Atacar(Personaje objetivo, Arena arena)
     {
-        double dañoBase = Destreza * Ataque * Nivel * Efectividad;
-
+        double dañoBase = (Destreza * Ataque * Nivel * Efectividad)/3;
 
         // Ventajas y desventajas elementales
         if (Tipo == TipoPersonaje.VOLADOR && objetivo.Tipo == TipoPersonaje.TERRESTRE ||
@@ -83,11 +81,10 @@ public class Personaje
         objetivo.Salud -= dañoFinal;
     }
 
-
-    public void usarHabilidad(HabilidadEspecial habilidad, Personaje objetivo, Arena arena)
+    public void UsarHabilidad(Personaje objetivo, Arena arena)
     {
-        //double danioBase = habilidad.Danio;
-        double danioBase = Destreza * habilidad.Danio * Nivel * Efectividad;
+        double danioBase = (Destreza * HabilidadEspecial.Danio * Nivel * Efectividad) / 3;
+
         if (arena.TipoBeneficiado == Tipo)
         {
             danioBase = danioBase * 1.2; // Beneficio del 20%
@@ -99,39 +96,39 @@ public class Personaje
             Console.WriteLine($"{Nombre} recibe un perjuicio de la arena!");
         }
 
-        if (habilidad.Tipo == TipoPersonaje.VOLADOR && objetivo.Tipo == TipoPersonaje.TERRESTRE ||
-        habilidad.Tipo == TipoPersonaje.TERRESTRE && objetivo.Tipo == TipoPersonaje.ACUATICA ||
-        habilidad.Tipo == TipoPersonaje.ACUATICA && objetivo.Tipo == TipoPersonaje.FUEGO ||
-        habilidad.Tipo == TipoPersonaje.FUEGO && objetivo.Tipo == TipoPersonaje.VOLADOR)
+        if (HabilidadEspecial.Tipo == TipoPersonaje.VOLADOR && objetivo.Tipo == TipoPersonaje.TERRESTRE ||
+            HabilidadEspecial.Tipo == TipoPersonaje.TERRESTRE && objetivo.Tipo == TipoPersonaje.ACUATICA ||
+            HabilidadEspecial.Tipo == TipoPersonaje.ACUATICA && objetivo.Tipo == TipoPersonaje.FUEGO ||
+            HabilidadEspecial.Tipo == TipoPersonaje.FUEGO && objetivo.Tipo == TipoPersonaje.VOLADOR)
         {
             danioBase = danioBase * 1.2; // Ventaja del 20%
             Console.WriteLine($"{Nombre} tiene ventaja elemental sobre {objetivo.Nombre}!");
         }
-        else if (habilidad.Tipo == TipoPersonaje.VOLADOR && objetivo.Tipo == TipoPersonaje.ACUATICA ||
-                 habilidad.Tipo == TipoPersonaje.TERRESTRE && objetivo.Tipo == TipoPersonaje.VOLADOR ||
-                 habilidad.Tipo == TipoPersonaje.ACUATICA && objetivo.Tipo == TipoPersonaje.TERRESTRE ||
-                 habilidad.Tipo == TipoPersonaje.FUEGO && objetivo.Tipo == TipoPersonaje.ACUATICA)
+        else if (HabilidadEspecial.Tipo == TipoPersonaje.VOLADOR && objetivo.Tipo == TipoPersonaje.ACUATICA ||
+                 HabilidadEspecial.Tipo == TipoPersonaje.TERRESTRE && objetivo.Tipo == TipoPersonaje.VOLADOR ||
+                 HabilidadEspecial.Tipo == TipoPersonaje.ACUATICA && objetivo.Tipo == TipoPersonaje.TERRESTRE ||
+                 HabilidadEspecial.Tipo == TipoPersonaje.FUEGO && objetivo.Tipo == TipoPersonaje.ACUATICA)
         {
             danioBase = danioBase * 0.8; // Desventaja del 20%
             Console.WriteLine($"{Nombre} tiene desventaja elemental sobre {objetivo.Nombre}.");
         }
 
-        Console.WriteLine($"{Nombre} usa {habilidad.Nombre} en {objetivo.Nombre} y causa {danioBase} de daño.");
+        Console.WriteLine($"{Nombre} usa {HabilidadEspecial.Nombre} en {objetivo.Nombre} y causa {danioBase} de daño.");
         objetivo.Salud -= danioBase;
     }
 
-    public void MostrarPersonaje()
-    {
-        Console.WriteLine($"Nombre: {Nombre}");
-        Console.WriteLine($"Nivel: {Nivel}");
-        Console.WriteLine($"Ataque: {Ataque}");
-        Console.WriteLine($"Armadura: {Armadura}");
-        Console.WriteLine($"Destreza: {Destreza}");
-        Console.WriteLine($"Velocidad: {Velocidad}");
-        Console.WriteLine($"Tipo: {Tipo}");
-        Console.WriteLine($"Salud: {Salud}");
-        Console.WriteLine($"Fecha de Nacimiento: {FechaDeNacimiento.ToShortDateString()}");
-        Console.WriteLine($"Habilidades: {HabilidadEspecial.Nombre}");
-    }
-
+   public void MostrarPersonaje()
+{
+    Console.WriteLine($"Nombre: {Nombre}");
+    Console.WriteLine($"Tipo: {Tipo}");
+    Console.WriteLine($"Fecha de Nacimiento: {FechaDeNacimiento.ToShortDateString()}");
+    Console.WriteLine($"Nivel: {Nivel}");
+    Console.WriteLine($"Ataque: {Ataque}");
+    Console.WriteLine($"Armadura: {Armadura}");
+    Console.WriteLine($"Destreza: {Destreza}");
+    Console.WriteLine($"Velocidad: {Velocidad}");
+    Console.WriteLine($"Salud: {Salud}");
+    Console.WriteLine($"Efectividad: {Efectividad}");
+    Console.WriteLine($"Ataque secreto: {HabilidadEspecial.Nombre} del tipo: {habilidadEspecial.Tipo}");
+}
 }
