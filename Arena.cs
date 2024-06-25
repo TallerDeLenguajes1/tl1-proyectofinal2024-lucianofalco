@@ -13,4 +13,8 @@ public class Arena{
     public string Nombre { get => nombre; set => nombre = value; }
     public TipoPersonaje TipoBeneficiado { get => tipoBeneficiado; set => tipoBeneficiado = value; }
     public TipoPersonaje TipoPerjudiciado { get => tipoPerjudiciado; set => tipoPerjudiciado = value; }
+
+    public void MostrarArena(){
+        Console.WriteLine($"Arena: {nombre}  , Beneficiado: {tipoBeneficiado} , Perjudicado: {tipoPerjudiciado}");
+    }
 }

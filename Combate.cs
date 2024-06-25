@@ -13,7 +13,6 @@ public class Combate
 
     public void iniciar()
     {
-
         Console.WriteLine($"El combate se llevara a cabo en la arena {arena}");
         while (jugador_1.Salud > 0 && jugador_2.Salud > 0)
         {
@@ -51,13 +50,7 @@ public class Combate
                 atacante.Atacar(defensor, arena);
                 break;
             case 2:
-                Console.WriteLine("Seleccione una habilidad:");
-                for (int i = 0; i < atacante.Habilidades.Count; i++)
-                {
-                    Console.WriteLine($"{i + 1}. {atacante.Habilidades[i].Nombre}");
-                }
-                int habilidadSeleccionada = int.Parse(Console.ReadLine()) - 1;
-                atacante.usarHabilidad(atacante.Habilidades[habilidadSeleccionada], defensor, arena);
+                atacante.usarHabilidad(atacante.HabilidadEspecial, defensor, arena);
                 break;
             default:
                 Console.WriteLine("Opción no válida, perdiendo turno.");
