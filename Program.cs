@@ -6,11 +6,8 @@ public class Program
     public static void Main()
     {
         GestorDeBatallas gestor = new GestorDeBatallas();
-
-        gestor.AgregarCombatientes(4); 
-
+        gestor.CargarJuego("Personajes.json",8);
         gestor.Inicio();
-
         Console.ReadLine();
     }
 }

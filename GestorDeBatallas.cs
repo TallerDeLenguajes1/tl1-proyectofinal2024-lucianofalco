@@ -1,16 +1,30 @@
 public class GestorDeBatallas
 {
-    private FabricaDePersonajes fabrica = new FabricaDePersonajes();
+    private FabricaDePersonajes fabrica;
     private List<Personaje> combatientes = new List<Personaje>();
     private List<Personaje> ganadores = new List<Personaje>();
+    private List<Personaje> Perdedores = new List<Personaje>();
     private Random random = new Random();
 
-    public void AgregarCombatientes(int cantidad)
+    public GestorDeBatallas()
     {
+        fabrica = new FabricaDePersonajes();
+    }
+
+    public void CargarJuego(string NombreJson, int cantidad)
+    {
+        combatientes = new List<Personaje>();
         for (int i = 0; i < cantidad; i++)
         {
-            combatientes.Add(fabrica.crearPersonajeAleatorio());
+            Personaje personaje;
+            do
+            {
+                personaje = fabrica.CrearPersonajeAleatorio();
+            } while (combatientes.Contains(personaje));
+            combatientes.Add(personaje);
         }
+        PersonajeJson.GuardarPersonajeJson(combatientes, NombreJson); // guardo la lista en .json
+        Console.Clear();
     }
 
     public void Inicio()
@@ -38,11 +52,11 @@ public class GestorDeBatallas
                     Personaje jugador2 = combatientes[i + 1];
                     Arena arena = Arena.GenerarArenaAleatoria();
 
-                  
                     Combate combate = new Combate(jugador1, jugador2, arena);
                     Personaje ganador = combate.iniciar();
-                    ganador.Salud += 20; 
+                    ganador.Salud += 20;
                     ganadores.Add(ganador);
+                    HistorialJson.GuardarGanador(ganador , "Historial.json");
                 }
                 else
                 {
@@ -57,10 +71,12 @@ public class GestorDeBatallas
                 Console.WriteLine($"{ganador.Nombre} pasa a la siguiente ronda.");
                 Console.ResetColor();
             }
+
             foreach (var perdedor in combatientes.Except(ganadores))
             {
-                Console.ForegroundColor = ConsoleColor.Red; 
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"{perdedor.Nombre} ha sido eliminado.");
+                Perdedores.Add(perdedor);
                 Console.ResetColor();
             }
 
