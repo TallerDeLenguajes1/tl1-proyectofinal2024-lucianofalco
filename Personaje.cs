@@ -45,7 +45,7 @@ public class Personaje
 
     public void Atacar(Personaje objetivo, Arena arena)
     {
-        double dañoBase = (Destreza * Ataque * Nivel * Efectividad)/3;
+        double dañoBase = Destreza * Ataque * Nivel * Efectividad/3;
 
         // Ventajas y desventajas elementales
         if (Tipo == TipoPersonaje.VOLADOR && objetivo.Tipo == TipoPersonaje.TERRESTRE ||
@@ -62,38 +62,38 @@ public class Personaje
                  Tipo == TipoPersonaje.FUEGO && objetivo.Tipo == TipoPersonaje.ACUATICA)
         {
             dañoBase = dañoBase * 0.8; // Desventaja del 20%
-            Console.WriteLine($"{Nombre} tiene desventaja elemental sobre {objetivo.Nombre}.");
+            //Console.WriteLine($"{Nombre} tiene desventaja elemental sobre {objetivo.Nombre}.");
         }
 
         if (arena.TipoBeneficiado == Tipo)
         {
             dañoBase = (int)(dañoBase * 1.2); // Beneficio del 20%
-            Console.WriteLine($"{Nombre} recibe un beneficio de la arena!");
+            //Console.WriteLine($"{Nombre} recibe un beneficio de la arena!");
         }
         else if (arena.TipoPerjudiciado == Tipo)
         {
             dañoBase = (int)(dañoBase * 0.8); // Perjuicio del 20%
-            Console.WriteLine($"{Nombre} recibe un perjuicio de la arena!");
+            //Console.WriteLine($"{Nombre} recibe un perjuicio de la arena!");
         }
 
         double dañoFinal = dañoBase * (100.0 / (100.0 + objetivo.Armadura * objetivo.Velocidad));
-        Console.WriteLine($"{Nombre} ataca a {objetivo.Nombre} y causa {dañoBase} de daño.");
+        //Console.WriteLine($"{Nombre} ataca a {objetivo.Nombre} y causa {dañoBase} de daño.");
         objetivo.Salud -= dañoFinal;
     }
 
     public void UsarHabilidad(Personaje objetivo, Arena arena)
     {
-        double danioBase = (Destreza * HabilidadEspecial.Danio * Nivel * Efectividad) / 3;
+        double danioBase = Destreza * HabilidadEspecial.Danio * Nivel * Efectividad / 3;
 
         if (arena.TipoBeneficiado == Tipo)
         {
             danioBase = danioBase * 1.2; // Beneficio del 20%
-            Console.WriteLine($"{Nombre} recibe un beneficio de la arena!");
+            //Console.WriteLine($"{Nombre} recibe un beneficio de la arena!");
         }
         else if (arena.TipoPerjudiciado == Tipo)
         {
             danioBase = danioBase * 0.8; // Perjuicio del 20%
-            Console.WriteLine($"{Nombre} recibe un perjuicio de la arena!");
+            //Console.WriteLine($"{Nombre} recibe un perjuicio de la arena!");
         }
 
         if (HabilidadEspecial.Tipo == TipoPersonaje.VOLADOR && objetivo.Tipo == TipoPersonaje.TERRESTRE ||
@@ -102,7 +102,7 @@ public class Personaje
             HabilidadEspecial.Tipo == TipoPersonaje.FUEGO && objetivo.Tipo == TipoPersonaje.VOLADOR)
         {
             danioBase = danioBase * 1.2; // Ventaja del 20%
-            Console.WriteLine($"{Nombre} tiene ventaja elemental sobre {objetivo.Nombre}!");
+            //Console.WriteLine($"{Nombre} tiene ventaja elemental sobre {objetivo.Nombre}!");
         }
         else if (HabilidadEspecial.Tipo == TipoPersonaje.VOLADOR && objetivo.Tipo == TipoPersonaje.ACUATICA ||
                  HabilidadEspecial.Tipo == TipoPersonaje.TERRESTRE && objetivo.Tipo == TipoPersonaje.VOLADOR ||
@@ -110,10 +110,10 @@ public class Personaje
                  HabilidadEspecial.Tipo == TipoPersonaje.FUEGO && objetivo.Tipo == TipoPersonaje.ACUATICA)
         {
             danioBase = danioBase * 0.8; // Desventaja del 20%
-            Console.WriteLine($"{Nombre} tiene desventaja elemental sobre {objetivo.Nombre}.");
+            //Console.WriteLine($"{Nombre} tiene desventaja elemental sobre {objetivo.Nombre}.");
         }
 
-        Console.WriteLine($"{Nombre} usa {HabilidadEspecial.Nombre} en {objetivo.Nombre} y causa {danioBase} de daño.");
+        //Console.WriteLine($"{Nombre} usa {HabilidadEspecial.Nombre} en {objetivo.Nombre} y causa {danioBase} de daño.");
         objetivo.Salud -= danioBase;
     }
 
@@ -130,5 +130,11 @@ public class Personaje
     Console.WriteLine($"Salud: {Salud}");
     Console.WriteLine($"Efectividad: {Efectividad}");
     Console.WriteLine($"Ataque secreto: {HabilidadEspecial.Nombre} del tipo: {habilidadEspecial.Tipo}");
+
+}
+   public string Estadisticas()
+{
+    string estadistica = $"Nombre: {Nombre} , Salud: {Salud}"; 
+    return estadistica ; 
 }
 }

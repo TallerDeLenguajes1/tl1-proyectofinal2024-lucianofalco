@@ -9,5 +9,9 @@ public class Program
         gestor.CargarJuego("Personajes.json",8);
         gestor.Inicio();
         Console.ReadLine();
+
+        //falta corregir las rondas, cuartos semi etc y el ganador, no entra al swich
+        //realizar una menu principal mostrando el logo del juego con las opciones iniciar , ver personajes
+        //otra opcion para ver el historial de ganadores
     }
 }
