@@ -1,20 +1,20 @@
-using System.Collections;
-
 public class GestorDeBatallas
 {
     private FabricaDePersonajes fabrica;
-    private List<Personaje> combatientes = new List<Personaje>();
-    private List<Personaje> ganadores = new List<Personaje>();
+    private List<Personaje> combatientes;
+    private List<Personaje> ganadores;
 
     public GestorDeBatallas()
     {
         fabrica = new FabricaDePersonajes();
+        combatientes = new List<Personaje>();
+        ganadores = new List<Personaje>();
     }
 
     public void CargarJuego(string NombreJson, int cantidad)
     {
-        combatientes = new List<Personaje>();
-        var nombreUsados = new List<string>() ;
+        combatientes.Clear();
+        var nombresUsados = new List<string>();
         Console.WriteLine("Combatientes: ");
         for (int i = 0; i < cantidad; i++)
         {
@@ -22,13 +22,12 @@ public class GestorDeBatallas
             do
             {
                 personaje = fabrica.CrearPersonajeAleatorio();
-            } while (nombreUsados.Contains(personaje.Nombre));
-            nombreUsados.Add(personaje.Nombre);
+            } while (nombresUsados.Contains(personaje.Nombre));
+            nombresUsados.Add(personaje.Nombre);
             Console.WriteLine("___________________________________________________________");
             personaje.MostrarPersonaje();
             Console.WriteLine("___________________________________________________________");
             Console.WriteLine();
-
             combatientes.Add(personaje);
         }
         PersonajeJson.GuardarPersonajeJson(combatientes, NombreJson); // guardo la lista en .json
@@ -39,60 +38,61 @@ public class GestorDeBatallas
 
     public void Inicio()
     {
-        switch (combatientes.Count)
+        while (combatientes.Count > 1)
         {
-            case 2:
-                ArteAscii.SemiFinal();
-                break;
-            case 4:
-                ArteAscii.CuartosFinal();
-                break;
-            case 8:
-                ArteAscii.OctavosFinal();
-                break;
-            case 16:
-                ArteAscii.RondaPreliminar();
-                break;
-            case 32:
-                ArteAscii.RondaPreliminar();
-                break;
-            default:
-                Console.WriteLine("Opción no válida");
-                break;
+            switch (combatientes.Count)
+            {
+                case 2:
+                    Console.WriteLine(ArteAscii.SemiFinal());
+                    break;
+                case 4:
+                    Console.WriteLine(ArteAscii.CuartosFinal());
+                    break;
+                case 8:
+                    Console.WriteLine(ArteAscii.OctavosFinal());
+                    break;
+                case 16: 
+                    Console.WriteLine(ArteAscii.RondaPreliminar());
+                    break ;
+                case 32:
+                    Console.WriteLine(ArteAscii.RondaPreliminar());
+                    break;
+                default:
+                    Console.WriteLine("Opción no válida");
+                    break;
+            }
+            mecanica();
         }
-        mecanica();
         Console.ForegroundColor = ConsoleColor.Green;
         ArteAscii.ganador();
         Console.WriteLine($"El ganador final es {combatientes[0].Nombre}");
         Console.ResetColor();
+        HistorialJson.GuardarGanador(combatientes[0], "Historial.json");
+
     }
 
     private void mecanica()
     {
-        while (combatientes.Count > 1)
+        ganadores.Clear();
+        for (int i = 0; i < combatientes.Count; i += 2)
         {
-            ganadores.Clear();
-            for (int i = 0; i < combatientes.Count; i += 2)
+            if (i + 1 < combatientes.Count)
             {
-                if (i + 1 < combatientes.Count)
-                {
-                    Personaje jugador1 = combatientes[i];
-                    Personaje jugador2 = combatientes[i + 1];
-                    Arena arena = Arena.GenerarArenaAleatoria();
-                    Combate combate = new Combate(jugador1, jugador2, arena);
-                    Personaje ganador = combate.iniciar();
-                    ganador.Salud += 20;
-                    ganadores.Add(ganador);
-                    HistorialJson.GuardarGanador(ganador, "Historial.json");
-                    Console.WriteLine("Presione una tecla para continuar...");
-                    Console.ReadKey();
-                }
-                else
-                {
-                    ganadores.Add(combatientes[i]);
-                }
+                Personaje jugador1 = combatientes[i];
+                Personaje jugador2 = combatientes[i + 1];
+                Arena arena = Arena.GenerarArenaAleatoria();
+                Combate combate = new Combate(jugador1, jugador2, arena);
+                Personaje ganador = combate.Iniciar();
+                ganadores.Add(ganador);
+                Console.WriteLine("Presione una tecla para continuar...");
+                Console.ReadKey();
+                Console.Clear();
             }
-            combatientes = new List<Personaje>(ganadores);
+            else
+            {
+                ganadores.Add(combatientes[i]);
+            }
         }
+        combatientes = new List<Personaje>(ganadores);
     }
 }
