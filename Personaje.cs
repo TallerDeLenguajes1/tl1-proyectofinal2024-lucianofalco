@@ -68,14 +68,14 @@ public class Personaje
 
         if (arena.TipoBeneficiado == Tipo)
         {
-            dañoBase = (int)(dañoBase * 1.2); // Beneficio del 20%
+            dañoBase = (float)(dañoBase * 1.2); // Beneficio del 20%
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine($"{Nombre} recibe un beneficio de la arena!");
             Console.ResetColor();
         }
         else if (arena.TipoPerjudiciado == Tipo)
         {
-            dañoBase = (int)(dañoBase * 0.8); // Perjuicio del 20%
+            dañoBase = (float)(dañoBase * 0.8); // Perjuicio del 20%
         }
 
         double dañoFinal = dañoBase * (100.0 / (100.0 + objetivo.Armadura * objetivo.Velocidad));

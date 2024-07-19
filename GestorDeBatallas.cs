@@ -1,14 +1,12 @@
 public class GestorDeBatallas
 {
-    private FabricaDePersonajes fabrica;
-    private List<Personaje> combatientes;
-    private List<Personaje> ganadores;
+    private FabricaDePersonajes fabrica = new FabricaDePersonajes();
+    private List<Personaje> combatientes = new List<Personaje>();
+    private List<Personaje> ganadores = new List<Personaje>();
 
     public GestorDeBatallas()
     {
-        fabrica = new FabricaDePersonajes();
-        combatientes = new List<Personaje>();
-        ganadores = new List<Personaje>();
+
     }
 
     public void CargarJuego(string NombreJson, int cantidad)
@@ -31,28 +29,28 @@ public class GestorDeBatallas
             combatientes.Add(personaje);
         }
         PersonajeJson.GuardarPersonajeJson(combatientes, NombreJson); // guardo la lista en .json
-        Console.WriteLine("Presione una tecla para continuar...");
-        Console.ReadKey();
-        Console.Clear();
     }
 
     public void Inicio()
     {
         while (combatientes.Count > 1)
         {
+            Console.WriteLine("Presione una tecla para continuar...");
+            Console.ReadKey();
+            Console.Clear();
             switch (combatientes.Count)
             {
                 case 2:
-                    Console.WriteLine(ArteAscii.SemiFinal());
+                    Console.WriteLine(ArteAscii.Final());
                     break;
                 case 4:
-                    Console.WriteLine(ArteAscii.CuartosFinal());
+                    Console.WriteLine(ArteAscii.SemiFinal());
                     break;
                 case 8:
-                    Console.WriteLine(ArteAscii.OctavosFinal());
+                    Console.WriteLine(ArteAscii.CuartosFinal());
                     break;
                 case 16: 
-                    Console.WriteLine(ArteAscii.RondaPreliminar());
+                    Console.WriteLine(ArteAscii.OctavosFinal());
                     break ;
                 case 32:
                     Console.WriteLine(ArteAscii.RondaPreliminar());
@@ -64,11 +62,10 @@ public class GestorDeBatallas
             mecanica();
         }
         Console.ForegroundColor = ConsoleColor.Green;
-        ArteAscii.ganador();
+        Console.WriteLine(ArteAscii.ganador());
         Console.WriteLine($"El ganador final es {combatientes[0].Nombre}");
         Console.ResetColor();
         HistorialJson.GuardarGanador(combatientes[0], "Historial.json");
-
     }
 
     private void mecanica()
@@ -84,14 +81,14 @@ public class GestorDeBatallas
                 Combate combate = new Combate(jugador1, jugador2, arena);
                 Personaje ganador = combate.Iniciar();
                 ganadores.Add(ganador);
-                Console.WriteLine("Presione una tecla para continuar...");
-                Console.ReadKey();
-                Console.Clear();
             }
             else
             {
                 ganadores.Add(combatientes[i]);
             }
+                Console.WriteLine("Presione una tecla para continuar...");
+                Console.ReadKey();
+                Console.Clear();
         }
         combatientes = new List<Personaje>(ganadores);
     }
