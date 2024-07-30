@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/tl1_proyectofinal2024_lucianofalco", 
+                "${workspaceFolder}/tl1-proyectofinal2024-lucianofalco.csproj", //CAMBIAR POR EL NOMBRE DEL ARCHIVO .csproj QUE ESTA EN LA CARPETA RAIZ 
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary;ForceNoAlign"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/tl1-proyectofinal2024-lucianofalco.csproj", 
+                "${workspaceFolder}/tl1-proyectofinal2024-lucianofalco.csproj", //CAMBIAR POR EL NOMBRE DEL ARCHIVO .csproj QUE ESTA EN LA CARPETA RAIZ
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary;ForceNoAlign"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/tl1-proyectofinal2024-lucianofalco.csproj" 
+                "${workspaceFolder}/CAMBIAR.csproj" //CAMBIAR POR EL NOMBRE DEL ARCHIVO .csproj QUE ESTA EN LA CARPETA RAIZ
             ],
             "problemMatcher": "$msCompile"
         }
