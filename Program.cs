@@ -35,9 +35,12 @@ public class Program
                     break;
                 case 2:
                     personajes = PersonajeJson.LeerPersonajesJson("Personajes.json");
+                    MensajesUI mensaje = new MensajesUI() ;
                     foreach (var personaje in personajes)
                     {
-                        personaje.MostrarPersonaje();
+                        Console.WriteLine("--------------------------------------");
+                        mensaje.ShowPersonaje(personaje);
+                        Console.WriteLine("--------------------------------------");
                     }
                     Console.WriteLine("Presione una tecla para continuar...");
                     Console.ReadKey();
@@ -45,10 +48,14 @@ public class Program
                     Menu();
                     break;
                 case 3:
+                    MensajesUI msj = new MensajesUI() ;
                     personajes = PersonajeJson.LeerPersonajesJson("Historial.json");
                     foreach (var personaje in personajes)
                     {
-                        personaje.MostrarPersonaje();
+                        Console.WriteLine("--------------------------------------");
+                        msj.ShowPersonaje(personaje);
+                        Console.WriteLine("--------------------------------------");
+
                     }
                     Console.WriteLine("Presione una tecla para continuar...");
                     Console.ReadKey();
@@ -77,13 +84,7 @@ public class Program
         while (opcion != 0)
         {
             Console.WriteLine(ArteAscii.Players());
-            Console.WriteLine("Seleccione la cantidad de jugadores:");
-            Console.WriteLine("(1). DOS JUGADORES");
-            Console.WriteLine("(2). CUATRO JUGADORES");
-            Console.WriteLine("(3). OCHO JUGADORES");
-            Console.WriteLine("(4). DIECISEIS JUGADORES");
-            Console.WriteLine("(5). TREINTA Y DOS JUGADORES");
-            Console.WriteLine("(0). VOLVER AL MENU PRINCIPAL");
+            ShowMenu();
 
             while (!int.TryParse(Console.ReadLine(), out opcion) || (opcion < 0 || opcion > 5))
             {
@@ -116,5 +117,16 @@ public class Program
         }
 
         return nro;
+    }
+
+    private static void ShowMenu()
+    {
+        Console.WriteLine("Seleccione la cantidad de jugadores:");
+        Console.WriteLine("(1). DOS JUGADORES");
+        Console.WriteLine("(2). CUATRO JUGADORES");
+        Console.WriteLine("(3). OCHO JUGADORES");
+        Console.WriteLine("(4). DIECISEIS JUGADORES");
+        Console.WriteLine("(5). TREINTA Y DOS JUGADORES");
+        Console.WriteLine("(0). VOLVER AL MENU PRINCIPAL");
     }
 }

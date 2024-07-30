@@ -68,14 +68,14 @@ public class Personaje
 
         if (arena.TipoBeneficiado == Tipo)
         {
-            dañoBase = (float)(dañoBase * 1.2); // Beneficio del 20%
+            dañoBase = (double)(dañoBase * 1.2); // Beneficio del 20%
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine($"{Nombre} recibe un beneficio de la arena!");
             Console.ResetColor();
         }
         else if (arena.TipoPerjudiciado == Tipo)
         {
-            dañoBase = (float)(dañoBase * 0.8); // Perjuicio del 20%
+            dañoBase = (double)(dañoBase * 0.8); // Perjuicio del 20%
         }
 
         double dañoFinal = dañoBase * (100.0 / (100.0 + objetivo.Armadura * objetivo.Velocidad));
@@ -124,21 +124,21 @@ public class Personaje
         objetivo.Salud -= danioBase;
     }
 
-   public void MostrarPersonaje()
-{
-    Console.WriteLine($"Nombre: {Nombre}");
-    Console.WriteLine($"Tipo: {Tipo}");
-    Console.WriteLine($"Fecha de Nacimiento: {FechaDeNacimiento.ToShortDateString()}");
-    Console.WriteLine($"Nivel: {Nivel}");
-    Console.WriteLine($"Ataque: {Ataque}");
-    Console.WriteLine($"Armadura: {Armadura}");
-    Console.WriteLine($"Destreza: {Destreza}");
-    Console.WriteLine($"Velocidad: {Velocidad}");
-    Console.WriteLine($"Salud: {Salud}");
-    Console.WriteLine($"Efectividad: {Efectividad}");
-    Console.WriteLine($"Ataque secreto: {HabilidadEspecial.Nombre} del tipo: {habilidadEspecial.Tipo}");
-
-}
+public string MostrarPersonaje()
+    {
+        string datos = $"{Nombre}\n" +
+                       $"- Tipo: {Tipo}\n" +
+                       $"- Fecha de Nacimiento: {FechaDeNacimiento.ToShortDateString()}\n" +
+                       $"- Nivel: {Nivel}\n" +
+                       $"- Ataque: {Ataque}\n" +
+                       $"- Armadura: {Armadura}\n" +
+                       $"- Destreza: {Destreza}\n" +
+                       $"- Velocidad: {Velocidad}\n" +
+                       $"- Salud: {Salud}\n" +
+                       $"- Efectividad: {Efectividad}\n" +
+                       $"- Ataque secreto: {HabilidadEspecial.Nombre} del tipo: {HabilidadEspecial.Tipo}";
+        return datos;
+    }
    public string Estadisticas()
 {
     string estadistica = $"Nombre: {Nombre} , Salud: {Salud}"; 

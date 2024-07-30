@@ -31,7 +31,7 @@ public class Arena{
 
         return new Arena(nombre, tipoBeneficiado, tipoPerjudiciado);
     }
-    public void MostrarArena(){
-        Console.WriteLine($"Arena: {Nombre}  , Beneficiado: {TipoBeneficiado} , Perjudicado: {TipoPerjudiciado}");
+    public string MostrarArena(){
+        return $"Arena: {Nombre}  , Beneficiado: {TipoBeneficiado} , Perjudicado: {TipoPerjudiciado}";
     }
 }

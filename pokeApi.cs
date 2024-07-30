@@ -36,7 +36,6 @@ public class PokeApi
         }
         catch (WebException ex)
         {
-            // Manejar error
             Console.WriteLine($"Error: {ex.Message}");
         }
 

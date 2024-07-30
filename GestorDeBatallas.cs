@@ -22,8 +22,9 @@ public class GestorDeBatallas
                 personaje = fabrica.CrearPersonajeAleatorio();
             } while (nombresUsados.Contains(personaje.Nombre));
             nombresUsados.Add(personaje.Nombre);
+            MensajesUI mensaje = new MensajesUI();
             Console.WriteLine("___________________________________________________________");
-            personaje.MostrarPersonaje();
+            mensaje.ShowPersonaje(personaje);
             Console.WriteLine("___________________________________________________________");
             Console.WriteLine();
             combatientes.Add(personaje);

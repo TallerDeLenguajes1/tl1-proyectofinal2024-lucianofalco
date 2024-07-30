@@ -151,6 +151,15 @@ ________________________________________________________________________________
 ╚═════════════════════════════════════════════════╝";
         return card;
     }
+    public static string CardArena(Arena arena)
+    {
+        string card = $@"
+╔════════════════════════════════════════════════════════════════════════════════════════════
+║   {arena.MostrarArena()}                 
+║                                                 
+";
+        return card;
+    }
 
     public static string Players(){
         string cantidad = $@"

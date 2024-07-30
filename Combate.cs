@@ -18,6 +18,9 @@ public class Combate
         Console.ResetColor();
         while (jugador1.Salud > 0 && jugador2.Salud > 0)
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(ArteAscii.CardArena(arena));
+            Console.ResetColor();
             Console.WriteLine(ArteAscii.CardPersonaje(jugador1));
             Console.WriteLine("                   vs");
             Console.WriteLine(ArteAscii.CardPersonaje(jugador2));

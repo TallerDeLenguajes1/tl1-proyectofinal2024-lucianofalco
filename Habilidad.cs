@@ -15,7 +15,7 @@ public class HabilidadEspecial
     public double Danio { get => danio; set => danio = value; }
     public TipoPersonaje Tipo { get => tipo; set => tipo = value; }
 
-    public void MostrarHabilidad(){
-        Console.WriteLine($"Habilidad: {Nombre} , Daño {Danio} , Tipo: {tipo}");
+    public string MostrarHabilidad(){
+        return $"Habilidad: {Nombre} , Daño {Danio} , Tipo: {tipo}";
     }
 }
