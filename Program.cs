@@ -12,11 +12,11 @@ public class Program
     {
         GestorDeBatallas gestor = new GestorDeBatallas();
         int opcion = 0;
-        List<Personaje> personajes ;
+        List<Personaje> personajes;
         Console.WriteLine(ArteAscii.Logo());
         while (opcion != 4)
         {
-            
+
             while (!int.TryParse(Console.ReadLine(), out opcion))
             {
                 Console.WriteLine("Por favor, introduce un número válido.");
@@ -28,6 +28,9 @@ public class Program
                     int nroJugadores = NroJugadores();
                     gestor.CargarJuego("Personajes.json", nroJugadores);
                     gestor.Inicio();
+                    Console.WriteLine("Presione una tecla para continuar...");
+                    Console.ReadKey();
+                    Console.Clear();
                     Menu();
                     break;
                 case 2:
@@ -36,6 +39,9 @@ public class Program
                     {
                         personaje.MostrarPersonaje();
                     }
+                    Console.WriteLine("Presione una tecla para continuar...");
+                    Console.ReadKey();
+                    Console.Clear();
                     Menu();
                     break;
                 case 3:
@@ -44,6 +50,9 @@ public class Program
                     {
                         personaje.MostrarPersonaje();
                     }
+                    Console.WriteLine("Presione una tecla para continuar...");
+                    Console.ReadKey();
+                    Console.Clear();
                     Menu();
                     break;
                 case 4:
@@ -51,6 +60,9 @@ public class Program
                     break;
                 default:
                     Console.WriteLine("Opción no válida");
+                    Console.WriteLine("Presione una tecla para continuar...");
+                    Console.ReadKey();
+                    Console.Clear();
                     Menu();
                     break;
             }

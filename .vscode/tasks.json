@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/tl1-tp6-2024-lucianofalco.csproj", 
+                "${workspaceFolder}/tl1_proyectofinal2024_lucianofalco", 
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary;ForceNoAlign"
             ],
