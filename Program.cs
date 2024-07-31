@@ -28,7 +28,7 @@ public class Program
                     int nroJugadores = NroJugadores();
                     gestor.CargarJuego("Personajes.json", nroJugadores);
                     gestor.Inicio();
-                    Console.WriteLine("Presione una tecla para continuar...");
+                    Console.WriteLine("Presione una teclaa para continuar...");
                     Console.ReadKey();
                     Console.Clear();
                     Menu();
