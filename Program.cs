@@ -67,7 +67,7 @@ public class Program
                     break;
                 default:
                     Console.Clear();
-                    Console.WriteLine("Opción no válida");
+                    Console.WriteLine("Opción invalida");
                     Console.WriteLine("Presione una tecla para continuar...");
                     Console.ReadKey();
                     Console.Clear();
