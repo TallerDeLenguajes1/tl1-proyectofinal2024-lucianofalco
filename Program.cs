@@ -19,7 +19,7 @@ public class Program
 
             while (!int.TryParse(Console.ReadLine(), out opcion))
             {
-                Console.WriteLine("Por favor, introduce un número válido.");
+                Console.WriteLine("Por favor, introduce un número válido.\n");
             }
 
             switch (opcion)
@@ -34,13 +34,13 @@ public class Program
                     Menu();
                     break;
                 case 2:
+                    Console.Clear();
                     personajes = PersonajeJson.LeerPersonajesJson("Personajes.json");
                     MensajesUI mensaje = new MensajesUI() ;
                     foreach (var personaje in personajes)
                     {
-                        Console.WriteLine("--------------------------------------");
                         mensaje.ShowPersonaje(personaje);
-                        Console.WriteLine("--------------------------------------");
+                        Console.WriteLine("====================================================\n");
                     }
                     Console.WriteLine("Presione una tecla para continuar...");
                     Console.ReadKey();
@@ -48,14 +48,13 @@ public class Program
                     Menu();
                     break;
                 case 3:
+                    Console.Clear();
                     MensajesUI msj = new MensajesUI() ;
                     personajes = PersonajeJson.LeerPersonajesJson("Historial.json");
                     foreach (var personaje in personajes)
                     {
-                        Console.WriteLine("--------------------------------------");
                         msj.ShowPersonaje(personaje);
-                        Console.WriteLine("--------------------------------------");
-
+                        Console.WriteLine("====================================================\n");
                     }
                     Console.WriteLine("Presione una tecla para continuar...");
                     Console.ReadKey();
@@ -63,9 +62,11 @@ public class Program
                     Menu();
                     break;
                 case 4:
+                    Console.Clear();
                     Environment.Exit(0);
                     break;
                 default:
+                    Console.Clear();
                     Console.WriteLine("Opción no válida");
                     Console.WriteLine("Presione una tecla para continuar...");
                     Console.ReadKey();
