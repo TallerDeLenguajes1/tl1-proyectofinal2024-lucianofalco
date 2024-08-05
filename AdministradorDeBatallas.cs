@@ -12,7 +12,7 @@ public class AdministradorDeBatallas
     public void CargarJuego(string NombreJson, int cantidad)
     {
         combatientes.Clear();
-        var nombresUsados = new List<string>();
+        var nombresUsados = new List<string>(); 
         Console.WriteLine("Combatientes: ");
         for (int i = 0; i < cantidad; i++)
         {
@@ -23,7 +23,6 @@ public class AdministradorDeBatallas
             } while (nombresUsados.Contains(personaje.Nombre));
             nombresUsados.Add(personaje.Nombre);
             MensajesUI mensaje = new MensajesUI();
-            Console.WriteLine("___________________________________________________________");
             mensaje.ShowPersonaje(personaje);
             Console.WriteLine("___________________________________________________________");
             Console.WriteLine();
