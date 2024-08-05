@@ -32,14 +32,16 @@ public class Combate
         if (jugador1.Salud > 0)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"| {jugador1.Nombre} avanza a la siguiente ronda |");
+            Console.WriteLine("Avanza a la siguiente ronda");
+            Console.WriteLine(ArteAscii.CardPersonaje(jugador1));
             Console.ResetColor();
             return jugador1;
         }
         else
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"| {jugador2.Nombre} avanza a la siguiente ronda |");
+            Console.WriteLine("Avanza a la siguiente ronda");
+            Console.WriteLine(ArteAscii.CardPersonaje(jugador2));
             Console.ResetColor();
             return jugador2;
         }

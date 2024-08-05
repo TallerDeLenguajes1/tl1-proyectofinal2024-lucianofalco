@@ -2,18 +2,15 @@ public class FabricaDePersonajes
 {
     private static Random random = new Random();
     private static List<string> nombresPokemones;
-    private PokeApi pokeApi;
-    private List<Personaje> personajes = new List<Personaje>();
-
+    private PokeApi pokeApi = new PokeApi();
+    private List<Personaje> personajes = new List<Personaje>();    
     public PokeApi PokeApi { get => pokeApi; set => pokeApi = value; }
     public List<string> NombresPokemones { get => nombresPokemones; set => nombresPokemones = value; }
     public List<Personaje> Personajes { get => personajes; set => personajes = value; }
 
     public FabricaDePersonajes()
     {
-        pokeApi = new PokeApi();
-        string url = "https://pokeapi.co/api/v2/pokemon?limit=100";
-        nombresPokemones = pokeApi.GetNombresPokemones(url);
+        
     }
 
     public string ObtenerNombre()
@@ -68,15 +65,7 @@ public class FabricaDePersonajes
         }
     }
 
-    public string GenerarNombreAleatorio()
-    {
-        Random random = new Random();
-        string[] nombres = { "Aiden", "Blaze", "Kai", "Luna", "Nix", "Orion", "Phoenix", "Sage", "Titan", "Zephyr"};
 
-        string nombre = nombres[random.Next(nombres.Length)];
-        
-        return nombre;
-    }
 
     private DateTime GenerarFechaDeNacimientoAleatoria()
     {
