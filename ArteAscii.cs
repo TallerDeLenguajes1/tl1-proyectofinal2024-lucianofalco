@@ -202,7 +202,6 @@ public static string documentacion = @"
             - System.Collections.Generic
             - System.Linq
             - System.Text
-            - RestSharp (para realizar peticiones HTTP)
 
             Recursos utilizados:
             - Arte ASCII para presentaciones

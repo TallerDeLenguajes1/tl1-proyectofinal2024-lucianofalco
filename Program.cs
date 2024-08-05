@@ -5,7 +5,7 @@ public class Program
 {
     public static void Main()
     {
-        GestorDeBatallas gestor = new GestorDeBatallas();
+        AdministradorDeBatallas gestor = new AdministradorDeBatallas();
         int opcion = 0;
         presentacion();
 
@@ -36,7 +36,7 @@ public class Program
         Console.WriteLine("\u001b[38;2;173;255;47m{0}\u001b[0m", ArteAscii.Logo);
     }
 
-    private static void MenuPrincipal(GestorDeBatallas gestor, int opcion)
+    private static void MenuPrincipal(AdministradorDeBatallas gestor, int opcion)
     {
         switch (opcion)
         {
@@ -76,7 +76,7 @@ public class Program
 
     public static void Menu()
     {
-        GestorDeBatallas gestor = new GestorDeBatallas();
+        AdministradorDeBatallas gestor = new AdministradorDeBatallas();
         int opcion = 0;
         Console.WriteLine("\u001b[38;2;173;255;47m{0}\u001b[0m",ArteAscii.Logo);
         while (opcion != 4)
@@ -159,7 +159,7 @@ public class Program
         Environment.Exit(0);
     }
 
-    private static void CargarJugadores(GestorDeBatallas gestor)
+    private static void CargarJugadores(AdministradorDeBatallas gestor)
     {
         int nroJugadores = NroJugadores();
         if (nroJugadores != 0)

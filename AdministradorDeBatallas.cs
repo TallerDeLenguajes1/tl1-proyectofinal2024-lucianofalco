@@ -1,10 +1,10 @@
-public class GestorDeBatallas
+public class AdministradorDeBatallas
 {
     private FabricaDePersonajes fabrica = new FabricaDePersonajes();
     private List<Personaje> combatientes = new List<Personaje>();
     private List<Personaje> ganadores = new List<Personaje>();
 
-    public GestorDeBatallas()
+    public AdministradorDeBatallas()
     {
 
     }
@@ -29,7 +29,7 @@ public class GestorDeBatallas
             Console.WriteLine();
             combatientes.Add(personaje);
         }
-        PersonajeJson.GuardarPersonajeJson(combatientes, NombreJson); // guardo la lista en .json
+        PersonajeJson.GuardarPersonajeJson(combatientes, NombreJson);
     }
 
     public void Inicio()
