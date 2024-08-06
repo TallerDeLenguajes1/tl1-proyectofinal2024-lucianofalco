@@ -42,19 +42,19 @@ public class GestorDeBatallas
             switch (combatientes.Count)
             {
                 case 2:
-                    Console.WriteLine(ArteAscii.Final());
+                    Console.WriteLine(ArteAscii.Final);
                     break;
                 case 4:
-                    Console.WriteLine(ArteAscii.SemiFinal());
+                    Console.WriteLine(ArteAscii.SemiFinal);
                     break;
                 case 8:
-                    Console.WriteLine(ArteAscii.CuartosFinal());
+                    Console.WriteLine(ArteAscii.CuartosFinal);
                     break;
                 case 16: 
-                    Console.WriteLine(ArteAscii.OctavosFinal());
+                    Console.WriteLine(ArteAscii.OctavosFinal);
                     break ;
                 case 32:
-                    Console.WriteLine(ArteAscii.RondaPreliminar());
+                    Console.WriteLine(ArteAscii.RondaPreliminar);
                     break;
                 default:
                     Console.WriteLine("Opción no válida");
@@ -63,7 +63,7 @@ public class GestorDeBatallas
             mecanica();
         }
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine(ArteAscii.ganador());
+        Console.WriteLine(ArteAscii.ganador);
         Console.WriteLine($"El ganador final es {combatientes[0].Nombre}");
         Console.ResetColor();
         HistorialJson.GuardarGanador(combatientes[0], "Historial.json");

@@ -5,15 +5,80 @@ public class Program
 {
     public static void Main()
     {
-        Menu();
+        GestorDeBatallas gestor = new GestorDeBatallas();
+        int opcion = 0;
+        presentacion();
+
+        while (opcion != 4)
+        {
+            opcion = IngresarEntero();
+            MenuPrincipal(gestor, opcion);
+        }
+    }
+
+    private static void presentacion()
+    {
+        Console.WriteLine("Preciona una tecla para iniciar...");
+        Console.ReadKey();
+        Console.Clear();
+        Console.WriteLine("\u001b[38;2;255;253;208m{0}\u001b[0m", ArteAscii.presentacion1);
+        Console.ReadKey();
+        Console.Clear();
+        Console.WriteLine("\u001b[38;2;255;253;208m{0}\u001b[0m", ArteAscii.presentacion2);
+        Console.ReadKey();
+        Console.Clear();
+        Console.WriteLine("\u001b[38;2;255;253;208m{0}\u001b[0m", ArteAscii.presentacion3);
+        Console.ReadKey();
+        Console.Clear();
+        Console.WriteLine("\u001b[38;2;255;253;208m{0}\u001b[0m", ArteAscii.presentacion4);
+        Console.ReadKey();
+        Console.Clear();
+        Console.WriteLine("\u001b[38;2;173;255;47m{0}\u001b[0m", ArteAscii.Logo);
+    }
+
+    private static void MenuPrincipal(GestorDeBatallas gestor, int opcion)
+    {
+        switch (opcion)
+        {
+            case 1:
+                CargarJugadores(gestor);
+                Menu();
+                break;
+            case 2:
+                leerPersonajes();
+                Menu();
+                break;
+            case 3:
+
+                leerGanadores();
+                Menu();
+                break;
+            case 4:
+                SalirDelJuego();
+                break;
+            default:
+                OpcionInvalida();
+                Menu();
+                break;
+        }
+    }
+
+    private static int IngresarEntero()
+    {
+        int opcion;
+        while (!int.TryParse(Console.ReadLine(), out opcion))
+        {
+            Console.WriteLine("Por favor, introduce un número válido.\n");
+        }
+
+        return opcion;
     }
 
     public static void Menu()
     {
         GestorDeBatallas gestor = new GestorDeBatallas();
         int opcion = 0;
-        List<Personaje> personajes;
-        Console.WriteLine(ArteAscii.Logo());
+        Console.WriteLine("\u001b[38;2;173;255;47m{0}\u001b[0m",ArteAscii.Logo);
         while (opcion != 4)
         {
 
@@ -25,55 +90,89 @@ public class Program
             switch (opcion)
             {
                 case 1:
-                    int nroJugadores = NroJugadores();
-                    gestor.CargarJuego("Personajes.json", nroJugadores);
-                    gestor.Inicio();
-                    Console.WriteLine("Presione una tecla para continuar...");
-                    Console.ReadKey();
-                    Console.Clear();
+                    CargarJugadores(gestor);
                     Menu();
                     break;
                 case 2:
-                    Console.Clear();
-                    personajes = PersonajeJson.LeerPersonajesJson("Personajes.json");
-                    MensajesUI mensaje = new MensajesUI() ;
-                    foreach (var personaje in personajes)
-                    {
-                        mensaje.ShowPersonaje(personaje);
-                        Console.WriteLine("====================================================\n");
-                    }
-                    Console.WriteLine("Presione una tecla para continuar...");
-                    Console.ReadKey();
-                    Console.Clear();
+    
+                    leerPersonajes();
                     Menu();
                     break;
                 case 3:
-                    Console.Clear();
-                    MensajesUI msj = new MensajesUI() ;
-                    personajes = PersonajeJson.LeerPersonajesJson("Historial.json");
-                    foreach (var personaje in personajes)
-                    {
-                        msj.ShowPersonaje(personaje);
-                        Console.WriteLine("====================================================\n");
-                    }
-                    Console.WriteLine("Presione una tecla para continuar...");
-                    Console.ReadKey();
-                    Console.Clear();
+                    leerGanadores();
                     Menu();
                     break;
                 case 4:
-                    Console.Clear();
-                    Environment.Exit(0);
+                    SalirDelJuego();
                     break;
                 default:
-                    Console.Clear();
-                    Console.WriteLine("Opción no válida");
-                    Console.WriteLine("Presione una tecla para continuar...");
-                    Console.ReadKey();
-                    Console.Clear();
+                    OpcionInvalida();
                     Menu();
                     break;
             }
+        }
+    }
+
+    private static void OpcionInvalida()
+    {
+        Console.Clear();
+        Console.WriteLine("Opción no válida");
+        Console.WriteLine("Presione una tecla para continuar...");
+        Console.ReadKey();
+        Console.Clear();
+    }
+
+    private static void leerGanadores()
+    {
+        Console.Clear();
+        List<Personaje> personajes = PersonajeJson.LeerPersonajesJson("Historial.json");
+        MensajesUI msj = new MensajesUI();
+        foreach (var personaje in personajes)
+        {
+            msj.ShowPersonaje(personaje);
+            Console.WriteLine("====================================================\n");
+        }
+        Console.WriteLine("Presione una tecla para continuar...");
+        Console.ReadKey();
+        Console.Clear();
+    }
+
+    private static void leerPersonajes()
+    {
+        Console.Clear();
+        List<Personaje>personajes = PersonajeJson.LeerPersonajesJson("Personajes.json");
+        MensajesUI mensaje = new MensajesUI();
+        foreach (var personaje in personajes)
+        {
+            mensaje.ShowPersonaje(personaje);
+            Console.WriteLine("====================================================");
+        }
+        Console.WriteLine("Presione una tecla para continuar...");
+        Console.ReadKey();
+        Console.Clear();
+    }
+
+    private static void SalirDelJuego()
+    {
+        Console.Clear();
+        MostrarMensajeIA(ArteAscii.documentacion);
+        Environment.Exit(0);
+    }
+
+    private static void CargarJugadores(GestorDeBatallas gestor)
+    {
+        int nroJugadores = NroJugadores();
+        if (nroJugadores != 0)
+        {   
+        gestor.CargarJuego("Personajes.json", nroJugadores);
+        gestor.Inicio();
+        Console.WriteLine("Presione una tecla para continuar...");
+        Console.ReadKey();
+        Console.Clear();
+        }
+        else
+        {
+            ShowMenu();
         }
     }
 
@@ -84,7 +183,7 @@ public class Program
 
         while (opcion != 0)
         {
-            Console.WriteLine(ArteAscii.Players());
+            Console.WriteLine(ArteAscii.Players);
             ShowMenu();
 
             while (!int.TryParse(Console.ReadLine(), out opcion) || (opcion < 0 || opcion > 5))
@@ -109,8 +208,6 @@ public class Program
                 case 5:
                     nro = 32;
                     return nro;
-                case 0:
-                    return 0;
                 default:
                     Console.WriteLine("Opción no válida");
                     break;
@@ -130,4 +227,13 @@ public class Program
         Console.WriteLine("(5). TREINTA Y DOS JUGADORES");
         Console.WriteLine("(0). VOLVER AL MENU PRINCIPAL");
     }
+private static void MostrarMensajeIA(string eliminado)
+    {
+        foreach (char letra in eliminado)
+        {
+            Console.Write(letra);
+            Thread.Sleep(15);
+        }
+    }
 }
+
